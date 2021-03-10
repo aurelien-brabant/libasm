@@ -1,26 +1,34 @@
-global	test_ft_strlen
-
-; libasm
-extern	ft_strlen
-
-; glibc
-extern	printf
-extern	strlen
-
-; test
-extern	test_strlen_cmp
-extern test_output
+; **************************************************************************** #
+;                                                                              #
+;                                                         :::      ::::::::    #
+;    test_ft_strlen.s                                   :+:      :+:    :+:    #
+;                                                     +:+ +:+         +:+      #
+;    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
+;                                                 +#+#+#+#+#+   +#+            #
+;    Created: 2021/03/10 18:33:34 by abrabant          #+#    #+#              #
+;    Updated: 2021/03/10 18:33:34 by abrabant         ###   ########.fr        #
+;                                                                              #
+; **************************************************************************** #
 
 section .data
 	str1	db "Hello world, this is a string",0
 	str2	db "This is another string", 0
 	str3	db 0
-	arr		dq str1, str2, str3, 0
+	str4	db "h",0
+	str5	db "he",0
+	str6	db "hel",0
+	arr		dq str1, str2, str3, str4, str5, str6, 0
 
 	; for output
 	fmt		db 'string: "%s"',10,"strlen    => %ld", 10, "ft_strlen => %ld", 10, 0
 
-section .text
+global	test_ft_strlen
+
+extern	ft_strlen
+extern	printf
+extern	strlen
+extern	test_strlen_cmp
+extern test_output
 
 ; TEST FT_STRLEN FUNCTION
 ;
