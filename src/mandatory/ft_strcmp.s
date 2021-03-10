@@ -1,23 +1,32 @@
 ; **************************************************************************** #
 ;                                                                              #
 ;                                                         :::      ::::::::    #
-;    ft_strlen.s                                        :+:      :+:    :+:    #
+;    ft_strcmp.s                                        :+:      :+:    :+:    #
 ;                                                     +:+ +:+         +:+      #
 ;    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 ;                                                 +#+#+#+#+#+   +#+            #
-;    Created: 2021/03/10 18:57:24 by abrabant          #+#    #+#              #
-;    Updated: 2021/03/10 18:57:24 by abrabant         ###   ########.fr        #
+;    Created: 2021/03/10 19:04:38 by abrabant          #+#    #+#              #
+;    Updated: 2021/03/10 19:04:38 by abrabant         ###   ########.fr        #
 ;                                                                              #
 ; **************************************************************************** #
 
-global ft_strlen
+global	ft_strcmp
 
-ft_strlen:
-	xor rcx, rcx
+ft_strcmp:
+	xor rax, rax
+	xor	ebx, ebx
 
-loopUntilNull:
-	inc	rcx
-	cmp	byte [rdi + rcx - 1], 0
-	jne	loopUntilNull
-	dec	rcx
+loopCmp:
+	mov al, byte [rdi]
+	cmp al, 0
+	je strcmp_ret
+	cmp al, byte [rsi]
+	jne strcmp_ret
+	inc rdi
+	inc rsi
+	jmp loopCmp 
+
+strcmp_ret:
+	mov bl, byte [rsi]
+	sub eax, ebx
 	ret

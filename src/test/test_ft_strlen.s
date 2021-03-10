@@ -11,16 +11,16 @@
 ; **************************************************************************** #
 
 section .data
-	str1	db "Hello world, this is a string",0
-	str2	db "This is another string", 0
-	str3	db 0
-	str4	db "h",0
-	str5	db "he",0
-	str6	db "hel",0
-	arr		dq str1, str2, str3, str4, str5, str6, 0
+	strlen1	db "Hello world, this is a string",0
+	strlen2	db "This is another string", 0
+	strlen3	db 0
+	strlen4	db "h",0
+	strlen5	db "he",0
+	strlen6	db "hel",0
+	strlen_arr		dq strlen1, strlen2, strlen3, strlen4, strlen5, strlen6, 0
 
 	; for output
-	fmt		db 'string: "%s"',10,"strlen    => %ld", 10, "ft_strlen => %ld", 10, 0
+	fmt		db 'string: "%s"',10,"strlen          => %ld", 10, "ft_strlen       => %ld", 10, 0
 
 global	test_ft_strlen
 
@@ -42,41 +42,28 @@ test_ft_strlen:
 	jmp 	loopTest
 
 loopTest:
-	cmp		qword [arr + r12 * 8], 0
+	cmp		qword [strlen_arr + r12 * 8], 0
 	je		exit_test
-	mov		rdi, [arr + r12 * 8]
+	mov		rdi, [strlen_arr + r12 * 8]
 	call	strlen
 	mov		r13, rax
 	call	ft_strlen
 	mov		r14, rax
-	call 	output
-	inc		r12
-	jmp		loopTest
 
-exit_test:
-	ret
-
-; ROUTINE
-; Output results in a comprehensive format to help the user figure out
-; what has been tested and what are the results.
-
-output:
-	; prologue
-	push	rdi
-
-	; prepare printf call
+	; output
 	mov		rdi, fmt
-	mov		rsi, [arr + r12 * 8]
+	mov		rsi, [strlen_arr + r12 * 8]
 	mov		rdx, r13
 	mov		rcx, r14
 	call	printf
 
-	; call the test decision
 	lea		rdi, test_strlen_cmp
 	mov		rsi, r13
 	mov		rdx, r14
 	call	test_output
 	
-	; epilogue
-	pop		rdi
+	inc		r12
+	jmp		loopTest
+
+exit_test:
 	ret

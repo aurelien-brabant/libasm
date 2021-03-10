@@ -11,8 +11,8 @@
 ; **************************************************************************** #
 
 section .data
-	msg_pass	db "<TEST: OK>", 0
-	msg_fail	db "<TEST: KO>", 0
+	msg_pass	db `\033[0;34m<\033[0m\033[0;32mOK\033[0;34m>\033[0;m`, 0
+	msg_fail	db `\033[0;34m<\033[0m\033[0;31mKO\033[0;34m>\033[0;m`, 0
 
 global	test_output
 extern	puts
