@@ -12,22 +12,25 @@
 
 global	ft_strdup
 
-extern	malloc
+%include "libasm.s"
 
-extern	ft_strlen
-extern	ft_strcpy
+extern	malloc
 
 ; ft_strdup(const char *s)
 
 ft_strdup:
-	push r12
-	mov r12, rdi ; keep *s* in r12
-	call ft_strlen
-	mov rdi, rax ; set length of string as malloc first arg
-	inc rdi ; increment first arg to include null termination
-	call malloc ; call to malloc
-	mov rdi, rax ; dst to copy into is the malloced string
-	mov rsi, r12 ; the src for the copy is the string given to strdup
-	call ft_strcpy
-	pop r12
+	push	r12
+	mov		r12, rdi 	; keep *s* in r12
+	call	ft_strlen
+	mov 	rdi, rax	; set length of string as malloc first arg
+	inc		rdi			; increment first arg to include null termination
+	call	malloc		; call to malloc
+	cmp		rax, 0		; check for malloc failure
+	je		ret_strdup	; return if failure occured
+	mov		rdi, rax	; dst to copy into is the malloced string
+	mov		rsi, r12	; the src for the copy is the string given to strdup
+	call	ft_strcpy
+
+ret_strdup:
+	pop	r12
 	ret
