@@ -22,15 +22,18 @@ section .data
 	; for output
 	strlen_fmt	db 'string: "%s"',10,"strlen          => %ld", 10, "ft_strlen       => %ld", 10, 0
 
-; TEXT ;
-
 section .text
 
 global	test_ft_strlen
 
-extern	ft_strlen
+; glibc
 extern	printf
 extern	strlen
+
+; libasm
+extern	ft_strlen
+
+; test
 extern	test_strlen_cmp
 extern	test_output
 
@@ -42,6 +45,7 @@ extern	test_output
 ; r12-14 GPRs are used because they're callee saved which is convenient.
 
 test_ft_strlen:
+	; prologue
 	push 	r12
 	push	r13
 	push	r14
@@ -65,7 +69,8 @@ loopTest:
 	mov		rdx, r13
 	mov		rcx, r14
 	call	printf
-
+	
+	; compare
 	lea		rdi, test_strlen_cmp
 	mov		rsi, r13
 	mov		rdx, r14
@@ -75,8 +80,9 @@ loopTest:
 	jmp		loopTest
 
 exit_test:
-	add rsp, 8
-	pop r14
-	pop r13
-	pop r12
+	; epilogue
+	add	rsp, 8
+	pop	r14
+	pop	r13
+	pop	r12
 	ret

@@ -11,6 +11,7 @@
 ; **************************************************************************** ;
 
 global ft_write
+extern __errno_location
 
 ft_write:
 	mov rax, 1
@@ -24,5 +25,9 @@ ft_write:
 ; setting it manually is dangerous and pointless.
 
 set_error:
-	mov rax, -1
+	mov		ecx, eax
+	neg		ecx					; make the value positive
+	call	__errno_location	; put errno's address in rax
+	mov		dword [rax], ecx	; set errno to the correct value
+	mov		rax, -1				; make ft_write ret value -1
 	ret

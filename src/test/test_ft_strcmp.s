@@ -32,9 +32,9 @@ section	.data
 	strcmp7_str1	db 0
 	strcmp7_str2	db 0
 
-	strcmp_arr		dq strcmp1_str1, strcmp1_str2, strcmp2_str1, strcmp2_str2,	\
-					strcmp3_str1, strcmp3_str2, strcmp4_str1, strcmp4_str2,		\
-					strcmp5_str1, strcmp5_str2, strcmp6_str1, strcmp6_str2,		\
+	strcmp_arr		dq strcmp1_str1, strcmp1_str2, strcmp2_str1, strcmp2_str2,\
+					strcmp3_str1, strcmp3_str2, strcmp4_str1, strcmp4_str2,\
+					strcmp5_str1, strcmp5_str2, strcmp6_str1, strcmp6_str2,\
 					strcmp7_str1, strcmp7_str2, 0
 
 	; for printf
@@ -44,9 +44,14 @@ section .text
 
 global test_ft_strcmp
 
+; glibc
 extern printf
 extern strcmp
+
+; libasm
 extern ft_strcmp
+
+; test
 extern test_strcmp_cmp
 extern test_output
 
@@ -55,6 +60,7 @@ extern test_output
 ; r14d used to hold ft_strcmp's return value
 
 test_ft_strcmp:
+	; prologue
 	push	r12
 	push	r13
 	push	r14
@@ -62,29 +68,30 @@ test_ft_strcmp:
 	xor		r12, r12
 
 loopStrcmp:
-	cmp qword [strcmp_arr + r12 * 8], 0
-	je exit_test
-	mov rdi, [strcmp_arr + r12 * 8]
-	mov rsi, [strcmp_arr + r12 * 8 + 8]
-	call strcmp
-	mov r13d, eax
-	call ft_strcmp
-	mov r14d, eax
+	cmp		qword [strcmp_arr + r12 * 8], 0
+	je		exit_test
+	mov		rdi, [strcmp_arr + r12 * 8]
+	mov		rsi, [strcmp_arr + r12 * 8 + 8]
+	call	strcmp
+	mov		r13d, eax
+	call	ft_strcmp
+	mov		r14d, eax
 	; printf
-	mov edi, strcmp_fmt
-	mov esi, [strcmp_arr + r12 * 8]
-	mov edx, [strcmp_arr + r12 * 8 + 8]
-	mov ecx, r13d
-	mov r8d, r14d
-	call printf
-	mov rdi, test_strcmp_cmp
-	mov esi, r13d
-	mov edx, r14d
-	call test_output
-	add r12, 2	; go to the next string duo
-	jmp loopStrcmp
+	mov		edi, strcmp_fmt
+	mov		esi, [strcmp_arr + r12 * 8]
+	mov		edx, [strcmp_arr + r12 * 8 + 8]
+	mov		ecx, r13d
+	mov		r8d, r14d
+	call	printf
+	mov		rdi, test_strcmp_cmp
+	mov		esi, r13d
+	mov		edx, r14d
+	call	test_output
+	add		r12, 2	; go to the next string duo
+	jmp		loopStrcmp
 
 exit_test:
+	; epilogue
 	add	rsp, 8
 	pop	r14
 	pop	r13

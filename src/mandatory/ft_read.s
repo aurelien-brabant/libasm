@@ -1,5 +1,7 @@
 global ft_read
 
+extern	__errno_location
+
 ft_read:
 	mov rax, 0
 	syscall
@@ -11,6 +13,11 @@ ft_read:
 ; to indicate an error. errno is automatically set by linux syscalls so
 ; setting it manually is dangerous and pointless.
 
+
 set_error:
+	mov		rcx, rax
+	neg		rcx
+	call	__errno_location
+	mov		[rax], rcx
 	mov rax, -1
 	ret

@@ -17,6 +17,7 @@ global	test_strlen_cmp
 global	test_strcmp_cmp
 global	test_strcpy_cmp
 global	test_strdup_cmp
+global	test_cmp_int
 
 extern	strcmp
 
@@ -65,6 +66,12 @@ test_strdup_cmp:
 test_strcpy_cmp:
 	call	strcmp	; a simple call to strcmp using rdi and rsi will set rax to zero if the strings are equal.
 	ret
+
+; CMP_INT ;
+test_cmp_int:
+	cmp	rdi, rsi
+	je ret_zero
+	jmp ret_non_zero
 
 ret_zero:
 	mov	rax, 0

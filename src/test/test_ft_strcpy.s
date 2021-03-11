@@ -15,17 +15,24 @@ section	.bss
 section	.text
 
 global test_ft_strcpy
+
+; glibc
+extern	strcpy
+extern	printf
+
+; libasm
+extern	ft_strcpy
+
+; test
 extern	test_strcpy_cmp
 extern	test_output
-extern	strcpy
-extern	ft_strcpy
-extern	printf
 
 ; r12 will be used as an iterator
 ; r13 will hold the address of strcmp's return value
 ; r14 will hold the address of ft_strcmp's return value
 
 test_ft_strcpy:
+	; prologue
 	push r12
 	push r13
 	push r14
@@ -61,6 +68,7 @@ loopTest:
 	jmp loopTest
 
 exit_test:
+	; epilogue
 	add rsp, 8
 	pop r14
 	pop r13

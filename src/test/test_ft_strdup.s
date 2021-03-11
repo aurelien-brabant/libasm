@@ -1,3 +1,15 @@
+; **************************************************************************** #
+;                                                                              #
+;                                                         :::      ::::::::    #
+;    test_ft_strdup.s                                   :+:      :+:    :+:    #
+;                                                     +:+ +:+         +:+      #
+;    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
+;                                                 +#+#+#+#+#+   +#+            #
+;    Created: 2021/03/11 22:22:33 by abrabant          #+#    #+#              #
+;    Updated: 2021/03/11 22:22:33 by abrabant         ###   ########.fr        #
+;                                                                              #
+; **************************************************************************** #
+
 section .data
 
 strdup1_src	db	"Some text to copy",0
@@ -13,12 +25,15 @@ section	.text
 
 global test_ft_strdup
 
+; glibc
 extern	printf
 extern	free
 extern	strdup
 
+; libasm
 extern	ft_strdup
 
+; test
 extern	test_strdup_cmp
 extern	test_output
 
@@ -52,10 +67,10 @@ loopTest:
 	call	printf
 
 	; compare
-	mov rdi, test_strdup_cmp
-	mov rsi, r13
-	mov rdx, r14
-	call test_output
+	mov		rdi, test_strdup_cmp
+	mov		rsi, r13
+	mov		rdx, r14
+	call	test_output
 
 	mov		rdi, r13
 	call	free
