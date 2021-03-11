@@ -20,10 +20,6 @@ ft_write:
 	jl set_error
 	ret
 
-; set the return value of ft_write to -1 as it must be explicitely set to it
-; to indicate an error. errno is automatically set by linux syscalls so
-; setting it manually is dangerous and pointless.
-
 set_error:
 	mov		ecx, eax
 	neg		ecx					; make the value positive
