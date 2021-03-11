@@ -11,16 +11,20 @@
 ; **************************************************************************** #
 
 section .data
-	strlen1	db "Hello world, this is a string",0
-	strlen2	db "This is another string", 0
-	strlen3	db 0
-	strlen4	db "h",0
-	strlen5	db "he",0
-	strlen6	db "hel",0
-	strlen_arr		dq strlen1, strlen2, strlen3, strlen4, strlen5, strlen6, 0
+	strlen1		db "Hello world, this is a string",0
+	strlen2		db "This is another string", 0
+	strlen3		db 0
+	strlen4		db "h",0
+	strlen5		db "he",0
+	strlen6		db "hel",0
+	strlen_arr	dq strlen1, strlen2, strlen3, strlen4, strlen5, strlen6, 0
 
 	; for output
-	fmt		db 'string: "%s"',10,"strlen          => %ld", 10, "ft_strlen       => %ld", 10, 0
+	strlen_fmt	db 'string: "%s"',10,"strlen          => %ld", 10, "ft_strlen       => %ld", 10, 0
+
+; TEXT ;
+
+section .text
 
 global	test_ft_strlen
 
@@ -28,7 +32,7 @@ extern	ft_strlen
 extern	printf
 extern	strlen
 extern	test_strlen_cmp
-extern test_output
+extern	test_output
 
 ; TEST FT_STRLEN FUNCTION
 ;
@@ -38,8 +42,11 @@ extern test_output
 ; r12-14 GPRs are used because they're callee saved which is convenient.
 
 test_ft_strlen:
+	push 	r12
+	push	r13
+	push	r14
+	sub		rsp, 8
 	xor 	r12, r12
-	jmp 	loopTest
 
 loopTest:
 	cmp		qword [strlen_arr + r12 * 8], 0
@@ -47,11 +54,12 @@ loopTest:
 	mov		rdi, [strlen_arr + r12 * 8]
 	call	strlen
 	mov		r13, rax
+	xor		rax, rax	; make sure rax is reset to 0
 	call	ft_strlen
 	mov		r14, rax
 
 	; output
-	mov		rdi, fmt
+	mov		rdi, strlen_fmt
 	mov		rsi, [strlen_arr + r12 * 8]
 	mov		rdx, r13
 	mov		rcx, r14
@@ -66,4 +74,8 @@ loopTest:
 	jmp		loopTest
 
 exit_test:
+	add rsp, 8
+	pop r14
+	pop r13
+	pop r12
 	ret

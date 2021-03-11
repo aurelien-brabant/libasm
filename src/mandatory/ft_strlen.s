@@ -13,11 +13,11 @@
 global ft_strlen
 
 ft_strlen:
-	xor rcx, rcx
+	xor rax, rax
 
 loopUntilNull:
-	inc	rcx
-	cmp	byte [rdi + rcx - 1], 0
+	inc	rax
+	cmp	byte [rdi + rax - 1], 0
 	jne	loopUntilNull
-	dec	rcx
+	dec	rax
 	ret

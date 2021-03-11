@@ -9,8 +9,8 @@ strcpy_arr	dq	strcpy1_src, strcpy2_src, strcpy3_src, strcpy4_src, 0
 strcpy_fmt	db	`src="%s"\nstrcpy => "%s"\nft_strcpy => "%s"\n`,0
 
 section	.bss
-strcpy_dst_ref	resb	1000	; destination buffer for strcmp
-strcpy_dst_ft	resb	1000	; destination buffer for ft_strcmp
+	strcpy_dst_ref	resb	1000	; destination buffer for strcmp
+	strcpy_dst_ft	resb	1000	; destination buffer for ft_strcmp
 
 section	.text
 
@@ -26,6 +26,10 @@ extern	printf
 ; r14 will hold the address of ft_strcmp's return value
 
 test_ft_strcpy:
+	push r12
+	push r13
+	push r14
+	sub rsp, 8
 	xor r12, r12	; init r12 to zero
 
 loopTest:
@@ -57,4 +61,8 @@ loopTest:
 	jmp loopTest
 
 exit_test:
+	add rsp, 8
+	pop r14
+	pop r13
+	pop r12
 	ret

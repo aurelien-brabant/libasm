@@ -55,7 +55,11 @@ extern test_output
 ; r14d used to hold ft_strcmp's return value
 
 test_ft_strcmp:
-	xor r12, r12
+	push	r12
+	push	r13
+	push	r14
+	sub		rsp, 8
+	xor		r12, r12
 
 loopStrcmp:
 	cmp qword [strcmp_arr + r12 * 8], 0
@@ -81,4 +85,8 @@ loopStrcmp:
 	jmp loopStrcmp
 
 exit_test:
+	add	rsp, 8
+	pop	r14
+	pop	r13
+	pop	r12
 	ret
