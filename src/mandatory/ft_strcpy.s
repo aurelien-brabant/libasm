@@ -1,29 +1,31 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    main.s                                             :+:      :+:    :+:    ;
+;    ft_strcpy.s                                        :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: abrabant <abrabant@student.42.fr>          +;+  +:+       +;+         ;
 ;                                                 +;+;+;+;+;+   +;+            ;
-;    Created: 2021/03/01 21:08:40 by abrabant          ;+;    ;+;              ;
-;    Updated: 2021/03/01 21:08:40 by abrabant         ;;;   ;;;;;;;;.fr        ;
+;    Created: 2021/03/08 00:20:46 by abrabant          ;+;    ;+;              ;
+;    Updated: 2021/03/08 00:20:46 by abrabant         ;;;   ;;;;;;;;.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-;%include libasm.s
-extern test_ft_strlen
-extern test_ft_strcmp
-extern test_ft_strcpy
+global	ft_strcpy
 
-; glibc imports
-extern printf
+; rdi => destination string, must be large enough
+; rsi => source string, copied into destination
+ft_strcpy:
+	mov rax, rdi	; set the return value to the destination string
 
-section .text
-global main
+loopCopy:
+	cmp byte [rsi], 0
+	je ft_strcpy_ret
+	mov bl, byte[rsi]
+	mov byte [rdi], bl
+	inc rdi
+	inc rsi
+	jmp loopCopy
 
-main:
-	;call test_ft_strlen
-	call test_ft_strlen
-	call test_ft_strcmp
-	call test_ft_strcpy
+ft_strcpy_ret:
+	mov byte [rdi], 0	; set the final null byte in dest
 	ret
