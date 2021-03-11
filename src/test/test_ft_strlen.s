@@ -55,6 +55,7 @@ loopTest:
 	call	strlen
 	mov		r13, rax
 	xor		rax, rax	; make sure rax is reset to 0
+	mov		rdi, [strlen_arr + r12 * 8]
 	call	ft_strlen
 	mov		r14, rax
 
