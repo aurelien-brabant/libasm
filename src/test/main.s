@@ -24,7 +24,10 @@ section .data
 section .text
 global main
 
+; glibc
 extern printf
+
+; test
 extern test_ft_io
 extern test_ft_strlen
 extern test_ft_strcmp
