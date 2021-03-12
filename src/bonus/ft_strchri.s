@@ -14,6 +14,8 @@ global	ft_strchri
 
 ft_strchri:
 	mov	eax, -1
+	cmp	sil, 0
+	je	ret_strchri
 
 loopCheck:
 	inc	eax

@@ -11,7 +11,8 @@
 ; **************************************************************************** #
 
 section	.data
-	space_charset	db	`\t\v\r\f\n \0`
+	space_charset			db	`\t\v\r\f\n \0`
+	base_forbidden_charset	db	`+-\0`
 
 section	.text
 
@@ -41,9 +42,8 @@ findSign:
 	ret
 
 negSign:
-	neg	dword [rsp + 8]	; change sign variable, add eight because a call instruction has been performed
+	neg	qword [rsp + 8]	; change sign variable, add eight because a call instruction has been performed
 	jmp	findSign
-
 
 ; ensure that the base is correct (i.e has no duplicate)
 
@@ -52,18 +52,32 @@ ft_atoi_base:
 	push	r13
 	push	r14
 	push	r15
-	sub		rsp, 4		; sign variable, 1 or -1 (4 bits) + alignement
-	mov		r13, rdi	; first argument
-	mov		r14, rsi	; second argument
-	xor		r12, r12	; iterator
-	mov		rdi, r14
 
-	; check if base length is greater than 1
+	; STACK ALLOCATION
+	; 8 bytes for the sign variable, 8 bytes for alignement
+	sub		rsp, 16	
+
+	xor		r12, r12		; store the number
+	mov		r13, rdi		; first argument
+	mov		r14, rsi		; second argument
+
+	; check if base length is greater than 1 and store the length in r15
 	mov		rdi, r14
 	call	ft_strlen
 	mov		r15, rax
 	cmp		r15, 2
 	jl		ret_error
+	; check if base contains '+' or '-', which is forbidden
+	mov		rdi, r14
+	mov		rsi, 0x2D
+	call	ft_strchri
+	cmp		eax, -1
+	jne		ret_error
+	mov		rdi, r14
+	mov		rsi, 0x2B
+	call	ft_strchri
+	cmp		eax, -1
+	jne		ret_error
 	; check if base has no duplicate
 	mov		rdi, r14
 	call	ft_str_is_uniq
@@ -76,7 +90,7 @@ ft_atoi_base:
 	call	skipSpace
 
 	; get sign
-	mov		dword [rsp], 1 ; set to positive by default
+	mov		qword [rsp], 1 ; set to positive by default
 	dec		r13
 	call	findSign
 
@@ -87,10 +101,12 @@ buildNb:
 	mov		r10d, eax	; save the result temporary
 	cmp		r10d, -1
 	je		epilogue	; found a character not included in the base, stop there
-	mov		eax, r12d
-	mul		r15d
-	add		eax, r10d	; add result of ft_strchri
-	mov		r12d, eax
+	; multiply by base length
+	mov		rax, r12
+	mul		r15
+	add		rax, r10	; add result of ft_strchri
+	; put the result back in r12
+	mov		r12, rax
 	inc		r13
 	jmp		buildNb
 
@@ -98,9 +114,9 @@ ret_error
 	mov	r12d, 0
 
 epilogue:
-	mov		eax, r12d;
-	imul	dword [rsp]
-	add		rsp, 4
+	mov		rax, r12;
+	imul	qword [rsp]	; multiply by the sign variable
+	add		rsp, 16
 	pop		r15
 	pop		r14
 	pop		r13
