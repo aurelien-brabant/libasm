@@ -92,7 +92,7 @@ test_write_error:
 	call	write
 	mov		r13d, eax			; move write's return value in r13d
 	mov		r14d, [r12]			; move errno value in r14d
-	mov 	dword [r12], 0;			; reset errno
+	mov 	dword [r12], 0;		; reset errno
 
 	mov		rdi, 42
 	xor		rsi, rsi

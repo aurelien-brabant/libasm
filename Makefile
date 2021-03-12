@@ -6,42 +6,52 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/01 19:18:47 by abrabant          #+#    #+#              #
-#    Updated: 2021/03/11 22:36:54 by abrabant         ###   ########.fr        #
+#    Updated: 2021/03/12 15:17:39 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #----------[ CC / LD ]----------#
 
-COMPILER		= nasm
+ASMCOMP			= nasm
+CC				= clang -Iinclude
+CFLAGS			= -Wall -Wextra -Werror
 COMP_FLAGS		= -f elf64 -g -Iinclude
 LD				= gcc
 LD_FLAGS		= -no-pie -g -L. -lasm
+LD_BONUS_FLAGS	= -no-pie -g -L. -lasm_bonus
 RM				= rm -rf
 TARGET			= libasm.a
-TEST_TARGET		= test.out
+TARGET_BONUS	= libasm_bonus.a
 
 #----------[ SRCS / OBJS ]----------#
 
-VPATH			= ./src:./src/mandatory:./src/util:./src/test
+# Mandatory part
 
-SRCS			= ft_write.s ft_read.s ft_strlen.s ft_strcpy.s ft_strcmp.s	\
-				ft_strdup.s
+SRCS			= $(addprefix ./src/mandatory/, ft_write.s ft_read.s ft_strlen.s ft_strcpy.s ft_strcmp.s ft_strdup.s)
+TEST_SRCS		= $(addprefix ./test/mandatory/, test_ft_strlen.s test_ft_strcmp.s test_ft_strcpy.s test_ft_strdup.s test_ft_io.s test_output.s test_cmp.s main.s)
 
-TEST_SRCS		= test_ft_strlen.s test_ft_strcmp.s test_ft_strcpy.s		\
-				test_ft_strdup.s test_ft_io.s								\
-				test_output.s main.s test_cmp.s
+BONUS_SRCS		= $(addprefix ./src/bonus/, ft_str_is_uniq.s ft_strchri.s ft_atoi_base.s)
+BONUS_TEST_SRCS	= $(addprefix ./test/bonus/, main.c)
 
-OBJ_DIR			= .obj
-OBJS			= $(SRCS:%.s=$(OBJ_DIR)/%.o)
-TEST_OBJS		= $(TEST_SRCS:%.s=$(OBJ_DIR)/%.o)
+OBJS			= $(SRCS:%.s=%.o)
+TEST_OBJS		= $(TEST_SRCS:%.s=%.o)
+BONUS_OBJS		= $(BONUS_SRCS:%.s=%.o)
+BONUS_TEST_OBJS	= $(BONUS_TEST_SRCS:%.c=%.o)
+
 
 #----------[ RULES ]----------#
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ_DIR) $(OBJS) $(TEST_OBJS)
+$(TARGET): $(OBJS) $(TEST_OBJS)
 	ar rcs $(TARGET) $(OBJS)
-	$(LD) -o $(TEST_TARGET) $(TEST_OBJS) $(LD_FLAGS)
+	$(LD) -o test.out $(TEST_OBJS) $(LD_FLAGS)
+
+bonus: $(TARGET_BONUS)
+
+$(TARGET_BONUS): $(OBJS) $(BONUS_OBJS) $(BONUS_TEST_OBJS)
+	ar rcs $(TARGET_BONUS) $(OBJS) $(BONUS_OBJS)
+	$(LD) -o bonus_test.out $(BONUS_TEST_OBJS) $(LD_BONUS_FLAGS) 
 
 clean:
 	$(RM) $(OBJ_DIR)
@@ -51,10 +61,22 @@ fclean: clean
 
 re: fclean all
 
+cleanbonus:
+	$(RM) $(BONUS_OBJS)
+	$(RM) $(BONUS_TEST_OBJS) 
+
+fcleanbonus: cleanbonus
+	$(RM) bonus_test.out
+
+rebonus: fcleanbonus bonus
+
 .PHONY: clean fclean all
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o:%.s
-	$(COMPILER) $(COMP_FLAGS) $< -o $@
+%.o:%.s
+	$(ASMCOMP) $(COMP_FLAGS) $< -o $@
+
+%.o:%.c
+	$(CC) $(CFLAGS) $< -c -o $@

@@ -1,0 +1,17 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-Iinclude",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "test/bonus/main.o",
+            "test/bonus/main.c"
+        ],
+        "directory": "/home/abrabant/Prog/42/libasm",
+        "file": "test/bonus/main.c"
+    }
+]
