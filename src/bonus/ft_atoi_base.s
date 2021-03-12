@@ -54,8 +54,9 @@ ft_atoi_base:
 	push	r15
 
 	; STACK ALLOCATION
-	; 8 bytes for the sign variable, 8 bytes for alignement
-	sub		rsp, 16	
+	; 8 bytes for the sign variable
+	sub		rsp, 8
+	mov		qword [rsp], 1 ; set to positive by default
 
 	xor		r12, r12		; store the number
 	mov		r13, rdi		; first argument
@@ -90,7 +91,6 @@ ft_atoi_base:
 	call	skipSpace
 
 	; get sign
-	mov		qword [rsp], 1 ; set to positive by default
 	dec		r13
 	call	findSign
 
@@ -116,7 +116,7 @@ ret_error
 epilogue:
 	mov		rax, r12;
 	imul	qword [rsp]	; multiply by the sign variable
-	add		rsp, 16
+	add		rsp, 8
 	pop		r15
 	pop		r14
 	pop		r13
