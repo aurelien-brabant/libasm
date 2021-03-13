@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 00:08:33 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/12 21:14:38 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/03/13 01:52:55 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libasm_bonus.h"
 #include "tester.h"
 
-static void	ft_atoi_base_test(void)
+static void	test_ft_atoi_base(void)
 {
 	static char			*test_args[][2] = {{"-1111", "01"},
 	{"343", "0123456789"}, {"    123", "0123456789"},
@@ -46,8 +46,21 @@ static void	ft_atoi_base_test(void)
 	}
 }
 
+static void	test_ft_list_push_front(void)
+{
+	t_list	*head;
+
+	head = NULL;
+	ft_list_push_front(&head, "First element");
+	ft_list_push_front(&head, "Second element");
+	printf("%s\n", (char *) head->data);
+	printf("%s\n", (char *) head->next->data);
+	printf("%d\n", ft_list_size(head));
+}
+
 int	main(void)
 {
 	puts("\n====== TESTING \033[1;33mft_atoi_base \033[0m=====\n");
-	ft_atoi_base_test();
+	test_ft_atoi_base();
+	test_ft_list_push_front();
 }

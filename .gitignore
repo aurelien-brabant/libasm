@@ -2,3 +2,6 @@ test.out
 .obj
 tutorial
 *.a
+*.o
+.cache
+*.out
