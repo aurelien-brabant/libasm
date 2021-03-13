@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:50:13 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 12:38:12 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:26:27 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	check(t_list *list, const char **strs, size_t strarr_len)
 
 void	test_ft_list_push_front(void)
 {
-	static const char	*strs[] = { "str1", "str2", "str3", "str4", NULL };
+	static const char	*strs[] = {"str1", "str2", "str3", "str4", NULL};
 	size_t				i;
 	size_t				strarr_len;
 	t_list				*list;
@@ -59,5 +59,4 @@ void	test_ft_list_push_front(void)
 		list = list->next;
 		free(tmp);
 	}
-
 }

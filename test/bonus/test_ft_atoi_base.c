@@ -28,4 +28,3 @@ void	test_ft_atoi_base(void)
 		++i;
 	}
 }
-

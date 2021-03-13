@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:17:10 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 12:35:58 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:25:15 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	test_ft_list_size(void)
 {
-	static const char	*strs[] = { "str1", "str2", "str3", "str4", NULL };
+	static const char	*strs[] = {"str1", "str2", "str3", "str4", NULL};
 	t_list				*list;
 	t_list				*tmp;
 	size_t				i;
