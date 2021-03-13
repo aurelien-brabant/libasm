@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/01 19:18:47 by abrabant          #+#    #+#              #
-#    Updated: 2021/03/13 18:15:38 by abrabant         ###   ########.fr        #
+#    Updated: 2021/03/13 20:24:33 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ TARGET_BONUS	= libasm_bonus.a
 SRCS			= $(addprefix ./src/mandatory/, ft_write.s ft_read.s ft_strlen.s ft_strcpy.s ft_strcmp.s ft_strdup.s)
 TEST_SRCS		= $(addprefix ./test/mandatory/, test_ft_strlen.s test_ft_strcmp.s test_ft_strcpy.s test_ft_strdup.s test_ft_io.s test_output.s test_cmp.s main.s)
 
-BONUS_SRCS		= $(addprefix ./src/bonus/, ft_str_is_uniq.s ft_strchri.s ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_remove_if.s)
-BONUS_TEST_SRCS	= $(addprefix ./test/bonus/, main.c test_ft_atoi_base.c test_ft_list_push_front.c assert_test.c test_ft_list_size.c test_ft_list_remove_if.c test_ft_list_remove_if_2.c)
+BONUS_SRCS		= $(addprefix ./src/bonus/, ft_str_is_uniq.s ft_strchri.s ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_remove_if.s ft_list_sort.s)
+BONUS_TEST_SRCS	= $(addprefix ./test/bonus/, main.c test_ft_atoi_base.c test_ft_list_push_front.c assert_test.c test_ft_list_size.c test_ft_list_remove_if.c test_ft_list_remove_if_2.c test_ft_list_sort.c)
 
 OBJS			= $(SRCS:%.s=%.o)
 TEST_OBJS		= $(TEST_SRCS:%.s=%.o)

@@ -110,7 +110,7 @@ buildNb:
 	inc		r13
 	jmp		buildNb
 
-ret_error
+ret_error:
 	mov	r12d, 0
 
 epilogue:

@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 00:10:33 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 17:59:35 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/03/13 20:13:52 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void	test_ft_list_push_front(void);
 void	test_ft_list_size(void);
 void	test_ft_list_remove_if(void);
 void	test_ft_list_remove_if_2(void);
+void	test_ft_list_sort(void);
 
 #endif
