@@ -12,12 +12,13 @@
 
 section	.data
 	space_charset			db	`\t\v\r\f\n \0`
-	base_forbidden_charset	db	`+-\0`
+	base_forbidden_charset	db	`+-\t\v\r\f\n \0`
 
 section	.text
 
 global	ft_atoi_base
 
+extern	ft_str_contains_set
 extern	ft_str_is_uniq
 extern	ft_strchri
 extern	ft_strlen
@@ -68,17 +69,12 @@ ft_atoi_base:
 	mov		r15, rax
 	cmp		r15, 2
 	jl		ret_error
-	; check if base contains '+' or '-', which is forbidden
+	; check if base doesn't include any forbidden character
 	mov		rdi, r14
-	mov		rsi, 0x2D
-	call	ft_strchri
-	cmp		eax, -1
-	jne		ret_error
-	mov		rdi, r14
-	mov		rsi, 0x2B
-	call	ft_strchri
-	cmp		eax, -1
-	jne		ret_error
+	mov		rsi, base_forbidden_charset
+	call	ft_str_contains_set
+	cmp		eax, 1
+	je		ret_error
 	; check if base has no duplicate
 	mov		rdi, r14
 	call	ft_str_is_uniq
