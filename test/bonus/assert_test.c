@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tester.h                                           :+:      :+:    :+:   */
+/*   assert_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 00:10:33 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 12:27:33 by abrabant         ###   ########.fr       */
+/*   Created: 2021/03/13 11:20:37 by abrabant          #+#    #+#             */
+/*   Updated: 2021/03/13 11:25:38 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTER_H
-# define TESTER_H
+#include <stdio.h>
 
-void	test_expect(int bool_expr);
-void	test_ft_atoi_base(void);
-void	test_ft_list_push_front(void);
-void	test_ft_list_size(void);
+void	test_expect(int bool_expr)
+{
+	if (!bool_expr)
+		puts("<\033[0;31mKO\033[0m>");
+	else
+		puts("<\033[0;32mOK\033[0m>");
 
-#endif
+}
