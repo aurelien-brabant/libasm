@@ -15,7 +15,7 @@ global	ft_list_size
 ; rdi: pointer to the first node of the list 
 ft_list_size:
 	xor	rax, rax	; init rax to zero, used as a counter
-	cmp	qword [rdi], 0
+	cmp	qword rdi, 0
 	je	epilogue
 
 listLoop:
