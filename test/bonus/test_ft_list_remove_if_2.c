@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 17:50:58 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 18:18:03 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/04/08 23:28:48 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	print_str_list(t_list *curr)
 {
 	while (curr != NULL)
 	{
-		printf("\"%s\",", (char *) curr->data);
+		printf("\"%s\",", (char *)curr->data);
 		curr = curr->next;
 	}
 	putchar('\n');
 }
 
-void	test_ft_list_remove_if_2(void)
+void		test_ft_list_remove_if_2(void)
 {
 	t_list				*list;
 	t_list				*curr;

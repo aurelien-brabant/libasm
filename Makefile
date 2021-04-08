@@ -67,6 +67,7 @@ cleanbonus:
 
 fcleanbonus: cleanbonus
 	$(RM) bonus_test.out
+	$(RM) $(TARGET_BONUS)
 
 rebonus: fcleanbonus bonus
 

@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:17:10 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 18:25:15 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/04/08 23:35:10 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	test_ft_list_size(void)
 	while (strs[i] != NULL)
 	{
 		printf("Push front => \"%s\"\n", strs[i]);
-		ft_list_push_front(&list, (void *) strs[i++]);
+		ft_list_push_front(&list, (void *)strs[i++]);
 	}
 	strarr_len = i;
 	printf("Testing length of the list:\nft_list_size(list)"

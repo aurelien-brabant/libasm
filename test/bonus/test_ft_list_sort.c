@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:33:52 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 22:20:07 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/04/08 23:35:27 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	cleanup(t_list *list)
 	}
 }
 
-void	test_ft_list_sort(void)
+void		test_ft_list_sort(void)
 {
 	const static int	tab[] = {1, 2, 3, 4, 5, 6, 2, 7, 8, 9, 12, 1, 3, -1};
 	const static int	expected[] = {1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 12};

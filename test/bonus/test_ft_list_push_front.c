@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:50:13 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 18:26:27 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/04/08 23:28:08 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	check(t_list *list, const char **strs, size_t strarr_len)
 	test_expect(test_ok);
 }
 
-void	test_ft_list_push_front(void)
+void		test_ft_list_push_front(void)
 {
 	static const char	*strs[] = {"str1", "str2", "str3", "str4", NULL};
 	size_t				i;
@@ -49,7 +49,7 @@ void	test_ft_list_push_front(void)
 	while (strs[i] != NULL)
 	{
 		printf("Push front => \"%s\"\n", strs[i]);
-		ft_list_push_front(&list, (void *) strs[i++]);
+		ft_list_push_front(&list, (void *)strs[i++]);
 	}
 	strarr_len = i;
 	check(list, strs, strarr_len);

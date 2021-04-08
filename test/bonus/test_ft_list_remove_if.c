@@ -6,7 +6,7 @@
 /*   By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:45:01 by abrabant          #+#    #+#             */
-/*   Updated: 2021/03/13 18:24:45 by abrabant         ###   ########.fr       */
+/*   Updated: 2021/04/08 23:32:24 by abrabant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ static void	check(t_list *head, const int *expect)
 	test_expect(test_ok);
 }
 
-void	test_ft_list_remove_if(void)
+void		test_ft_list_remove_if(void)
 {
 	static const int	tab[] = {1, 2, 100, 4, 5, 6, 7, 8, 9, -1};
 	static const int	expect[] = {5, 4, 2, 1, -1};
 	t_list				*list;
-	t_list				*curr;
 	size_t				i;
 	int					ref;
 
@@ -72,13 +71,11 @@ void	test_ft_list_remove_if(void)
 	i = 0;
 	while (tab[i] != -1)
 		ft_list_push_front(&list, (void *)&tab[i++]);
-	curr = list;
 	puts("Numbers stored in a list, in that order:");
-	print_int_list(curr);
+	print_int_list(list);
 	puts("Will attempt to remove number > 5 using ft_list_remove_if");
 	ft_list_remove_if(&list, &ref, &gt, NULL);
-	curr = list;
-	print_int_list(curr);
-	check(curr, expect);
-	cleanup(curr);
+	print_int_list(list);
+	check(list, expect);
+	cleanup(list);
 }
