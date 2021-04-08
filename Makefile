@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/01 19:18:47 by abrabant          #+#    #+#              #
-#    Updated: 2021/04/09 00:00:53 by abrabant         ###   ########.fr        #
+#    Updated: 2021/04/09 01:18:42 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ASMCOMP			= nasm
 CC				= clang -Iinclude
 CFLAGS			= -Wall -Wextra -Werror
-COMP_FLAGS		= -f elf64 -g -Iinclude
+COMP_FLAGS		= -f elf64 -g
 LD				= clang 
 LD_FLAGS		= -g -L. -lasm
 LD_BONUS_FLAGS	= -g -L. -lasm_bonus

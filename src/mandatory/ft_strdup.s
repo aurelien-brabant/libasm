@@ -12,9 +12,9 @@
 
 global	ft_strdup
 
-%include "libasm.s"
-
 extern	malloc
+extern	ft_strlen
+extern	ft_strcpy
 
 ; ft_strdup(const char *s)
 
