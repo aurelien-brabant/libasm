@@ -16,9 +16,9 @@ ASMCOMP			= nasm
 CC				= clang -Iinclude
 CFLAGS			= -Wall -Wextra -Werror
 COMP_FLAGS		= -f elf64 -g -Iinclude
-LD				= gcc
-LD_FLAGS		= -no-pie -g -L. -lasm
-LD_BONUS_FLAGS	= -no-pie -g -L. -lasm_bonus
+LD				= clang 
+LD_FLAGS		= -g -L. -lasm
+LD_BONUS_FLAGS	= -g -L. -lasm_bonus
 RM				= rm -rf
 TARGET			= libasm.a
 TARGET_BONUS	= libasm_bonus.a
@@ -54,7 +54,7 @@ $(TARGET_BONUS): $(OBJS) $(BONUS_OBJS) $(BONUS_TEST_OBJS)
 	$(LD) -o bonus_test.out $(BONUS_TEST_OBJS) $(LD_BONUS_FLAGS) 
 
 clean:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(TARGET) $(TEST_TARGET)
