@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/01 19:18:47 by abrabant          #+#    #+#              #
-#    Updated: 2021/03/13 23:40:24 by abrabant         ###   ########.fr        #
+#    Updated: 2021/04/09 00:00:53 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(TARGET) $(TEST_TARGET)
+	$(RM) $(TARGET) $(TEST_TARGET) test.out
 
 re: fclean all
 
@@ -66,8 +66,7 @@ cleanbonus:
 	$(RM) $(BONUS_TEST_OBJS) 
 
 fcleanbonus: cleanbonus
-	$(RM) bonus_test.out
-	$(RM) $(TARGET_BONUS)
+	$(RM) bonus_test.out $(TARGET_BONUS)
 
 rebonus: fcleanbonus bonus
 
