@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/01 19:18:47 by abrabant          #+#    #+#              #
-#    Updated: 2021/04/09 17:48:28 by abrabant         ###   ########.fr        #
+#    Updated: 2021/04/09 18:27:56 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ LD_FLAGS		= -g -L. -lasm
 LD_BONUS_FLAGS	= -g -L. -lasm
 RM				= rm -rf
 TARGET			= libasm.a
-TARGET_BONUS	= libasm.a
 
 #----------[ SRCS / OBJS ]----------#
 
@@ -56,12 +55,9 @@ clean:
 	$(RM) $(BONUS_OBJS)
 
 fclean: clean
-	$(RM) $(TARGET) $(TEST_TARGET) test.out
+	$(RM) $(TARGET) $(TEST_TARGET) test.out bonus_test.out
 
 re: fclean all
-
-
-rebonus: fcleanbonus bonus
 
 .PHONY: clean fclean all bonus
 
