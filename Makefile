@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/01 19:18:47 by abrabant          #+#    #+#              #
-#    Updated: 2021/04/09 01:18:42 by abrabant         ###   ########.fr        #
+#    Updated: 2021/04/09 17:48:28 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ CFLAGS			= -Wall -Wextra -Werror
 COMP_FLAGS		= -f elf64 -g
 LD				= clang 
 LD_FLAGS		= -g -L. -lasm
-LD_BONUS_FLAGS	= -g -L. -lasm_bonus
+LD_BONUS_FLAGS	= -g -L. -lasm
 RM				= rm -rf
 TARGET			= libasm.a
-TARGET_BONUS	= libasm_bonus.a
+TARGET_BONUS	= libasm.a
 
 #----------[ SRCS / OBJS ]----------#
 
@@ -47,33 +47,23 @@ $(TARGET): $(OBJS) $(TEST_OBJS)
 	ar rcs $(TARGET) $(OBJS)
 	$(LD) -o test.out $(TEST_OBJS) $(LD_FLAGS)
 
-bonus: $(TARGET_BONUS)
-
-$(TARGET_BONUS): $(OBJS) $(BONUS_OBJS) $(BONUS_TEST_OBJS)
-	ar rcs $(TARGET_BONUS) $(OBJS) $(BONUS_OBJS)
+bonus: $(TARGET) $(BONUS_OBJS) $(BONUS_TEST_OBJS)
+	ar rcs $(TARGET) $(BONUS_OBJS)
 	$(LD) -o bonus_test.out $(BONUS_TEST_OBJS) $(LD_BONUS_FLAGS) 
 
 clean:
 	$(RM) $(OBJS)
+	$(RM) $(BONUS_OBJS)
 
 fclean: clean
 	$(RM) $(TARGET) $(TEST_TARGET) test.out
 
 re: fclean all
 
-cleanbonus:
-	$(RM) $(BONUS_OBJS)
-	$(RM) $(BONUS_TEST_OBJS) 
-
-fcleanbonus: cleanbonus
-	$(RM) bonus_test.out $(TARGET_BONUS)
 
 rebonus: fcleanbonus bonus
 
-.PHONY: clean fclean all
-
-$(OBJ_DIR):
-	mkdir $(OBJ_DIR)
+.PHONY: clean fclean all bonus
 
 %.o:%.s
 	$(ASMCOMP) $(COMP_FLAGS) $< -o $@
