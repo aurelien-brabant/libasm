@@ -14,7 +14,7 @@ global	ft_strcmp
 
 ft_strcmp:
 	xor rax, rax
-	xor	ebx, ebx
+	xor	ecx, ecx
 
 loopCmp:
 	mov al, byte [rdi]
@@ -27,6 +27,6 @@ loopCmp:
 	jmp loopCmp 
 
 strcmp_ret:
-	mov bl, byte [rsi]
-	sub eax, ebx
+	mov cl, byte [rsi]
+	sub eax, ecx
 	ret

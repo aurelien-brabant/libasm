@@ -20,8 +20,8 @@ ft_strcpy:
 loopCopy:
 	cmp byte [rsi], 0
 	je ft_strcpy_ret
-	mov bl, byte[rsi]
-	mov byte [rdi], bl
+	mov cl, byte[rsi]
+	mov byte [rdi], cl
 	inc rdi
 	inc rsi
 	jmp loopCopy
